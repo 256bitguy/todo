@@ -7,21 +7,21 @@ const Header = () => {
     <div
     style={{
         display:'flex',
-        border:"2px solid black",
+        
         height:"150px",
         fontSize:"30px"
     }}>
         <div style={{
             flex:1,
-            border:"2px solid black",
-            textAlign:"center"
+             justifyContent:"flex-start"
+             
             
         }}>
-            <Typography > Task Scheduler</Typography>
+            <Typography variant='h3'> Task Scheduler</Typography>
         </div>
         <div style={{
             flex:1,
-            border:"2px solid black"
+            
         }}>
             <Search/>
         </div>
