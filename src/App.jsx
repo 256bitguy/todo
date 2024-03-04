@@ -4,6 +4,7 @@ import Table from "./Table"
 import Footer from "./Footer"
 
 import { TaskProvider} from './Context'
+import Table2 from "./Table2"
 function App() {
  
    
@@ -11,7 +12,7 @@ function App() {
     <>
        <TaskProvider>
        <Header/>
-        <Table/>
+        <Table2/>
         <Footer/>
        </TaskProvider>
     </>

@@ -2,6 +2,7 @@ import React from 'react'
 import { TaskContext } from '../../Context';
  import TextField from '@mui/material/TextField';
 const Search = () => {
+   
   const {searchTerm,setSearchTerm}=React.useContext(TaskContext);
   function seting(e){
     setSearchTerm(e.target.value)

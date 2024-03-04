@@ -14,16 +14,17 @@ const Addsubtasks = () => {
 
   const handleAddSubTask = () => {
     // Use the subTaskText as needed, for example, store it in your state or perform an action
-    console.log('Submitted SubTask:', subTaskText);
+   
 
     // Reset the input field
     setSubTaskText('');
-    setSubtasks((prev) => [...prev, subTaskText]);
+    const newd={text:subTaskText}
+    setSubtasks((prev) => [...prev, newd]);
 
     // Toggle the addSubTask state
     setAddSubTask(!addSubTask);
   };
-  console.log(subtasks);
+   
   return (
     <div>
       {addSubTask ? (
@@ -36,7 +37,7 @@ const Addsubtasks = () => {
           <Button onClick={handleAddSubTask}>Submit</Button>
         </div>
       ) : (
-        <Button onClick={() => setAddSubTask(!addSubTask)}>Add New</Button>
+        <Button onClick={() => setAddSubTask(!addSubTask)}>Add a Subtask</Button>
       )}
     </div>
   );

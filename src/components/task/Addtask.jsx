@@ -21,54 +21,68 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 800,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
+const techs=[
+    {title:'React Js'},
+    {title:'Node Js'},
+    {title:'React +NodeJS'},
+    {title:'Javascript'}
+  ]
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export default function TransitionsModal() {
+  const {id, list,
+    tasks,
+    subtasks,
+    sdate,
+    edate,
+    status,
+    searchTerm,
+    setSearchTerm,
+    setTasks,
+    setSubtasks,
+    setSdate,
+    setEdate,
+    setStatus,setList}=React.useContext(TaskContext);
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
- 
+  const [startDate, setStartDate] = React.useState(new Date());
+  const [endDate, setEndDate] = React.useState(new Date());
+  const [selectedOption, setSelectedOption] = React.useState(null);
+  const [addSubtask,setAddSubTask]=React.useState(false)
+    const [currTask,setCurrTask]=React.useState('');
      
-    const [startDate, setStartDate] = React.useState(new Date());
-    const [selectedOption, setSelectedOption] = React.useState(null);
 
   const handleAutocompleteChange = (event, newValue) => {
      setSelectedOption(newValue);
     
   };
-  console.log(selectedOption);
-    const techs=[
-      {title:'React Js'},
-      {title:'Node Js'},
-      {title:'React +NodeJS'},
-      {title:'Javascript'}
-    ]
-    const dataFilled={
-      subtask:[],
-      date:startDate,
-      techs:'',
-
+  
+    const addedTask=(e)=>{
+setCurrTask(e.target.value);
+console.log(currTask);
     }
-    const [addSubtask,setAddSubTask]=React.useState(false)
-    const { list,
-      tasks,
-      subtasks,
-      sdate,
-      edate,
-      status,
-      searchTerm,
-      setSearchTerm,
-      setTasks,
-      setSubtasks,
-      setSdate,
-      setEdate,
-      setStatus}=React.useContext(TaskContext);
-      console.log(subtasks,sdate)
+
+      const added=()=>{
+        const newdata={
+          id:id+1,
+          Task:currTask,
+          start:startDate.toLocaleDateString(),
+          end:endDate.toLocaleDateString(),
+          status:selectedOption,
+           }
+
+           setList((prev)=>[...prev,newdata]);
+           console.log(list);
+            
+      }
+       
   return (
     <div>
       <Button onClick={handleOpen}>Tasks</Button>
@@ -88,23 +102,30 @@ export default function TransitionsModal() {
         <Fade in={open}>
           <Box sx={style}>
            <div>
-            <Typography variant='h4'>This is the name of task</Typography>
+            <Typography variant='h4'>Add A New Task Here</Typography>
            </div>
            <div style={{
             display:'flex',
             flexDirection:'row'
            }}>
                 <div> 
-                <Button onClick={()=>{setAddSubTask(!addSubtask)}}>Add Subtaks</Button>
+                <TextField placeholder='Add the task here' onChange={addedTask}></TextField>
                 <div>
                 <Addsubtasks/>
                 </div>
                 <List>
-                    <ListItem>   <Checkbox {...label}  onChange={()=>{disabled}} /> <Typography>1st Subtask</Typography></ListItem>
-                    <ListItem>   <Checkbox {...label}   /> <Typography>2nd Subtask</Typography></ListItem>
-                </List>
+                  {subtasks.map((item)=>{
+                    return(
+                      <ListItem>
+                         <Checkbox {...label}   /> <Typography>{item.text}</Typography>
+                      </ListItem>
+                    )
+                  })}
+                    </List>
                 <DatePicker selected={startDate} onChange={(date) => {setStartDate(date)
-                setSdate(startDate)}} />
+                }} /> 
+                <DatePicker selected={endDate} onChange={(date) => {setEndDate(date)
+                 }} />
 
                 </div>
                 <div>
@@ -128,6 +149,8 @@ export default function TransitionsModal() {
           />
         )}
       />
+
+      <Button onClick={added }>ADD To Task</Button>
                 </div>
            </div>
           </Box>
