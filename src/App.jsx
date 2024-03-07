@@ -13,7 +13,7 @@ function App() {
        <TaskProvider>
        <Header/>
         <Table2/>
-        <Footer/>
+         
        </TaskProvider>
     </>
   )

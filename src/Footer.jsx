@@ -4,7 +4,8 @@ import React from 'react'
 const Footer = () => {
   return (
     <div style={{
-        textAlign:"center"
+        textAlign:"center",
+        margin:"5px"
     }}>
         <Typography> Designed and developed by  Vivek Raj Srivastava</Typography>
     </div>

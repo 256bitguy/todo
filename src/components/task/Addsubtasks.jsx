@@ -37,7 +37,29 @@ const Addsubtasks = () => {
           <Button onClick={handleAddSubTask}>Submit</Button>
         </div>
       ) : (
-        <Button onClick={() => setAddSubTask(!addSubTask)}>Add a Subtask</Button>
+         
+        <Button
+   onClick={() => setAddSubTask(!addSubTask)}
+  variant="contained"
+  color="primary"
+  style={{
+    marginTop: '10px',
+    backgroundColor: '#2196F3', // Blue color
+    color: '#fff', // Text color
+    borderRadius: '8px',
+    padding: '12px 20px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    border: 'none',
+    outline: 'none',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    transition: 'background-color 0.3s ease-in-out',
+  }}
+>
+  ADD A SUBTASK
+</Button>
+
       )}
     </div>
   );

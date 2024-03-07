@@ -2,6 +2,7 @@ import { Button, TableBody, TableCell, TableContainer, TableFooter, TableHead, T
 import React from 'react'
 import { TaskContext } from './Context'
 import AddTask from './components/task/Addtask'
+import EditTask from './components/task/EditTask'
 import Delete from './components/actions/del/Delete'
 const Table2 = () => {
     const {list,setList}=React.useContext(TaskContext);
@@ -9,39 +10,38 @@ const Table2 = () => {
   return (
     <div 
     style={{
-      
+      margin:"10px",
        height:"80vh"
     }}>
         <TableContainer
         style={{
-            background:"#2123",
+            background:"#f0f0f0",
             display:"flex",
             flexDirection:"column",
-                fontSize:"40px",
             width:"100vw",
-            justifyContent:"space-around"
+            justifyContent:"space-evenly"
         }}>
             <TableHead
             style={{
                 flex:"1",
                 height:"100px",
                 width:"100%",
-                fontSize:"40px",
+                 
             }}>
                 <TableRow
                 style={{
                     display:"flex",
-                     justifyContent:"space-around",
-                    height:"200px",
+                     justifyContent:"space-evenly",
+                    height:"100px",
                     width:"100%",
                     fontSize:"40px",
                 }}>
-                    <TableCell><Typography variant="h4">Sno.</Typography></TableCell>
+                    <TableCell><Typography style={{ color: "#333" }} variant="h6">S No.</Typography></TableCell>
                     <TableCell> <AddTask/> </TableCell>
-                    <TableCell><Typography variant="h6">StartDate</Typography></TableCell>
-                    <TableCell><Typography variant="h6">End Date</Typography></TableCell>
-                    <TableCell><Typography variant="h6">TechUsed</Typography></TableCell>
-                    <TableCell><Typography variant="h6">Actions</Typography></TableCell>
+                    <TableCell><Typography style={{ color: "#333" }} variant="h6">StartDate</Typography></TableCell>
+                    <TableCell><Typography style={{ color: "#333" }} variant="h6">End Date</Typography></TableCell>
+                    <TableCell><Typography style={{ color: "#333" }} variant="h6">TechUsed</Typography></TableCell>
+                    <TableCell><Typography style={{ color: "#333" }} variant="h6">Actions</Typography></TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -51,16 +51,43 @@ const Table2 = () => {
                             return (
                                     <TableRow  style={{
                                         display:"flex",
-                                         justifyContent:"space-around",
-                                        height:"200px",
-                                        width:"100%"
+                                         justifyContent:"space-evenly",
+                                         textAlign:"center", 
+                                        height:"150px",
+                                        width:"100%",
+                                         
+                                        margin:'1px',backgroundColor: index % 2 === 0 ? "white" : "#f0f0f0",
                                     }}>
-                                        <TableCell><Typography variant="h4">{index+1}</Typography></TableCell>
-                    <TableCell><Typography variant="h4">{item.Task}</Typography></TableCell>
-                    <TableCell><Typography variant="h4">{item.start}</Typography></TableCell>
-                    <TableCell><Typography variant="h4">{item.end}</Typography></TableCell>
-                    <TableCell><Typography variant="h4">{item.status}</Typography></TableCell>
-                    <TableCell><span><Delete idea={item.id}/><Button>Edit</Button></span></TableCell>
+                                        <TableCell style={{
+                                            display:"flex",
+                                            justifyContent:"space-evenly",
+                                            alignItems:"center" 
+                                        }}><Typography variant="h4">{index+1}.</Typography></TableCell>
+                    <TableCell style={{
+                                            display:"flex",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                        }}><Typography variant="h6">{item.Task}</Typography></TableCell>
+                    <TableCell style={{
+                                            display:"flex",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                        }}><Typography variant="h6">{item.start}</Typography></TableCell>
+                    <TableCell style={{
+                                            display:"flex",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                        }}><Typography variant="h6">{item.end}</Typography></TableCell>
+                    <TableCell style={{
+                                            display:"flex",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                        }}><Typography variant="h6">{item.status}</Typography></TableCell>
+                    <TableCell style={{
+                                            display:"flex",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                        }}><span><Delete idea={item.id}/></span></TableCell>
                 
                                         </TableRow>
                             )
@@ -70,7 +97,14 @@ const Table2 = () => {
             </TableBody>
             <TableFooter style={{
                 flex:"1"
-            }}>Total number of tasks added are {list.length}</TableFooter>
+            }}>
+                <Typography variant='h6'>Total number of tasks added are {list.length}</Typography>
+                <div style={{
+                    textAlign:'center'
+                }}>
+                <Typography variant='h5' >Design and edited by Vivek raj Srivastava</Typography>
+                </div>
+                </TableFooter>
         </TableContainer>
     </div>
   )

@@ -34,7 +34,7 @@ const techs=[
     {title:'Javascript'}
   ]
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-export default function TransitionsModal() {
+export default function TransitionsModal({valuee}) {
   const {id, list,
     tasks,
     subtasks,
@@ -48,6 +48,9 @@ export default function TransitionsModal() {
     setSdate,
     setEdate,
     setStatus,setList}=React.useContext(TaskContext);
+     const subTasksL=list.filter((item)=>item.id==valuee);
+     const subtaskss=subTasksL[0].subtaskss;
+     console.log( subtaskss);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -85,7 +88,7 @@ console.log(currTask);
        
   return (
     <div>
-      <Button onClick={handleOpen}><Typography variant="h5" color={"#123abc"}>Add Tasks</Typography></Button>
+      <Button onClick={handleOpen}><Typography variant="h5" color={"#123abc"}>Edit</Typography></Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -102,100 +105,28 @@ console.log(currTask);
         <Fade in={open}>
           <Box sx={style}>
            <div>
-           <Typography
-  variant="h4"
-  style={{
-    textAlign: "center", // Center the text
-    fontWeight: "bold", // Font weight
-    letterSpacing: "2px", // Letter spacing
-    fontFamily: "Verdana, sans-serif", // Font family
-    color: "#4CAF50", // Green color
-    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)", // Text shadow
-  }}
->
-  Add a new task here
-</Typography>
-
+            <Typography variant='h4'>Edit Your New Task Here</Typography>
            </div>
            <div style={{
             display:'flex',
             flexDirection:'row'
            }}>
                 <div> 
-                <TextField
-  label="Add Task"
-  variant="outlined"
-  fullWidth
-  style={{
-    marginBottom: '15px',
-    backgroundColor: '#fff', // Input background color
-    borderRadius: '8px', // Rounded corners
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Box shadow
-  }}
-  InputLabelProps={{
-    style: {
-      fontWeight: 'bold', // Label font weight
-      color: '#333', // Label text color
-    },
-  }}
-  InputProps={{
-    style: {
-      fontSize: '16px', // Input font size
-      color: '#333', // Input text color
-    },
-  }}
-  onChange={addedTask}
-/>
-
-                <div>
-                <Addsubtasks/>
-                </div>
+                <TextField placeholder={subTasksL[0].Task} onChange={addedTask}></TextField>
+                
                 <List>
-                  {subtasks.map((item)=>{
+                  {subtaskss.map((item)=>{
                     return(
                       <ListItem>
-                         <Checkbox {...label}   /> <Typography>{item.text}</Typography>
+                         <Checkbox {...label}   /> <Typography>{item}</Typography>
                       </ListItem>
                     )
                   })}
                     </List>
-                    <DatePicker
-  selected={startDate}
-  onChange={(date) => setStartDate(date)}
-  placeholderText="Select Start Date"
-  dateFormat="MM/dd/yyyy"
-  style={{
-    marginTop: '10px',
-    width: '100%',
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    fontSize: '16px',
-    color: '#333',
-    padding: '8px',
-    border: 'none',
-    outline: 'none',
-  }}
-/>
-<DatePicker
-  selected={endDate}
-  onChange={(date) => setEndDate(date)}
-  placeholderText="Select End Date"
-  dateFormat="MM/dd/yyyy"
-  style={{
-    marginTop: '10px',
-    width: '100%',
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    fontSize: '16px',
-    color: '#333',
-    padding: '8px',
-    border: 'none',
-    outline: 'none',
-  }}
-/>
-
+                <DatePicker selected={startDate} onChange={(date) => {setStartDate(date)
+                }} /> 
+                <DatePicker selected={endDate} onChange={(date) => {setEndDate(date)
+                 }} />
 
                 </div>
                 <div>
@@ -205,59 +136,22 @@ console.log(currTask);
         options={techs.map((option) => option.title)}
          
         onChange={handleAutocompleteChange}
-        // renderTags={(value, getTagProps) =>
-        //   value.map((option, index) => (
-        //     <Chip variant="outlined" label={option} {...getTagProps({ index })} />
-        //   ))
-        // }
+        renderTags={(value, getTagProps) =>
+          value.map((option, index) => (
+            <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+          ))
+        }
         renderInput={(params) => (
           <TextField
             {...params}
             variant="filled"
-            label="Add Techs"
-            
+            label="freeSolo"
             placeholder="Favorites"
-            style={{
-              backgroundColor: '#fff', // Input background color
-              borderRadius: '8px', // Rounded corners
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Box shadow
-            }}
-            InputLabelProps={{
-              style: {
-                fontWeight: 'bold', // Label font weight
-                color: '#333', // Label text color
-              },
-            }}
-            renderOption={(props, option, { selected }) => (
-              <li {...props} style={{ backgroundColor: selected ? '#4CAF50' : 'white', padding: '8px' }}>
-                {option}
-              </li>)}
           />
         )}
       />
 
-<Button
-  onClick={added}
-  variant="contained"
-  color="primary"
-  style={{
-    marginTop: '10px',
-    backgroundColor: '#4CAF50', // Green color
-    color: '#fff', // Text color
-    borderRadius: '8px',
-    padding: '12px 20px',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    border: 'none',
-    outline: 'none',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    transition: 'background-color 0.3s ease-in-out',
-  }}
->
-  ADD TO TASK
-</Button>
-
+      <Button onClick={added }>ADD To Task</Button>
                 </div>
            </div>
           </Box>
